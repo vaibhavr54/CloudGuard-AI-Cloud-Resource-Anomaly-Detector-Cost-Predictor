@@ -52,29 +52,51 @@ Every 5 seconds, the system:
 ## Models compared
 
 **Classifiers:** 
+
 . Logistic Regression 
+
 · Decision Tree 
+
 · Random Forest 
+
 · Extra Trees 
+
 · Gradient Boosting 
+
 · AdaBoost 
+
 · XGBoost 
+
 · KNN 
+
 · SVC 
+
 · Gaussian NB
 
 **Regressors:** 
+
 . Ridge 
+
 · Lasso 
+
 · ElasticNet 
+
 · Decision Tree 
+
 · Random Forest 
+
 · Extra Trees 
+
 · Gradient Boosting 
+
 · XGBoost 
+
 · AdaBoost 
+
 · SVR 
+
 · KNN 
+
 · MLP
 
 ---
