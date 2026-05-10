@@ -2,6 +2,6 @@ services:
   - type: web
     name: CloudGuard-AI-Cloud-Resource-Anomaly-Detector-Cost-Predictor
     env: python
-    buildCommand: pip install -r requirements.txt && python src/data_generator.py && jupyter nbconvert --to notebook --execute notebooks/02_feature_engineering.ipynb --inplace && jupyter nbconvert --to notebook --execute notebooks/03_anomaly_labelling.ipynb --inplace && jupyter nbconvert --to notebook --execute notebooks/04_model_classification.ipynb --inplace && jupyter nbconvert --to notebook --execute notebooks/05_model_regression.ipynb --inplace && jupyter nbconvert --to notebook --execute notebooks/07_pipeline_integration.ipynb --inplace
+    buildCommand: pip install -r requirements.txt && python train.py 
     startCommand: python -m uvicorn api.main:app --host 0.0.0.0 --port $PORT
     plan: free
