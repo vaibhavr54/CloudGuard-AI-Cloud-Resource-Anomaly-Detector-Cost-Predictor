@@ -2,7 +2,7 @@
 
 A real-time ML system that detects cloud infrastructure anomalies and forecasts cost impact — with SHAP explainability on every prediction.
 
-![Dashboard Preview](assets/dashboard.png)
+<img width="1870" height="2974" alt="image" src="https://github.com/user-attachments/assets/d9225085-49f7-4647-aa43-1327c3744516" />
 
 ---
 
