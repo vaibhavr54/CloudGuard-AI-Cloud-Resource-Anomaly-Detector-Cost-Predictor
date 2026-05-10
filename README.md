@@ -18,18 +18,8 @@ Every 5 seconds, the system:
 ---
 
 ## Architecture
-    Simulated CloudWatch Stream (every 5s)
-    ↓
-    Feature Engineering (95 features)
-    Rolling stats · Lag features · Z-scores · Temporal · Ratios
-    ↓
-    Stage 1: XGBoost Classifier → anomaly probability
-    ↓ (stacked — prob fed as feature)
-    Stage 2: XGBoost Regressor  → predicted cost $/hr
-    ↓
-    SHAP TreeExplainer → top 5 reasons per prediction
-    ↓
-    FastAPI backend → HTML/CSS/JS live dashboard
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/07235847-4a8a-484d-bd5a-0f12b1dd1d0e" />
 
 ---
 
