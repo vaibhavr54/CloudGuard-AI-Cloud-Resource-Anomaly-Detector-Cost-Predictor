@@ -1,5 +1,6 @@
-const API_BASE     = 'http://127.0.0.1:8000';
-const POLL_INTERVAL= 5000;
+// Auto-detect API base — works both locally and on Render
+const API_BASE = window.location.origin;
+const POLL_INTERVAL = 5000;
 
 let paused    = false;
 let pollTimer = null;
@@ -60,18 +61,15 @@ function togglePause() {
 function populateResourceSelector(resources) {
   const sel = document.getElementById('resourceSelector');
   resources.forEach(r => {
-    const opt   = document.createElement('option');
-    opt.value   = r.id;
+    const opt       = document.createElement('option');
+    opt.value       = r.id;
     opt.textContent = r.id;
     sel.appendChild(opt);
   });
 }
 
-function switchResource() {
-  // Future: filter charts by resource
-}
+function switchResource() { }
 
-// Init
 document.addEventListener('DOMContentLoaded', () => {
   fetchResources();
   startPolling();
