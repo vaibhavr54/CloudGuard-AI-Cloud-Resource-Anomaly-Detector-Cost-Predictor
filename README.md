@@ -51,9 +51,31 @@ Every 5 seconds, the system:
 
 ## Models compared
 
-**Classifiers:** Logistic Regression · Decision Tree · Random Forest · Extra Trees · Gradient Boosting · AdaBoost · XGBoost · KNN · SVC · Gaussian NB
+**Classifiers:** 
+. Logistic Regression 
+· Decision Tree 
+· Random Forest 
+· Extra Trees 
+· Gradient Boosting 
+· AdaBoost 
+· XGBoost 
+· KNN 
+· SVC 
+· Gaussian NB
 
-**Regressors:** Ridge · Lasso · ElasticNet · Decision Tree · Random Forest · Extra Trees · Gradient Boosting · XGBoost · AdaBoost · SVR · KNN · MLP
+**Regressors:** 
+. Ridge 
+· Lasso 
+· ElasticNet 
+· Decision Tree 
+· Random Forest 
+· Extra Trees 
+· Gradient Boosting 
+· XGBoost 
+· AdaBoost 
+· SVR 
+· KNN 
+· MLP
 
 ---
 
@@ -71,6 +93,7 @@ Every 5 seconds, the system:
 ---
 
 ## Project structure
+
 cloud-anomaly-detector/
 ├── data/                    # raw, processed, simulated data
 ├── notebooks/               # 7 Jupyter notebooks (EDA → deployment)
@@ -105,8 +128,8 @@ cloud-anomaly-detector/
 
 ```bash
 # 1. Clone
-git clone https://github.com/YOUR_USERNAME/cloud-anomaly-detector.git
-cd cloud-anomaly-detector
+https://github.com/vaibhavr54/CloudGuard-AI-Cloud-Resource-Anomaly-Detector-Cost-Predictor.git
+cd CloudGuard-AI-Cloud-Resource-Anomaly-Detector-Cost-Predictor
 
 # 2. Create virtual environment
 python -m venv venv
@@ -130,15 +153,15 @@ python -m uvicorn api.main:app --reload --port 8000
 
 ## Key technical decisions
 
-**Why synthetic data?** Real CloudWatch data is proprietary. The simulation models real AWS metric patterns — business hour load curves, weekend reduction, 5 anomaly types at 7% base rate — giving statistically realistic data for model development.
+. **Why synthetic data?** Real CloudWatch data is proprietary. The simulation models real AWS metric patterns — business hour load curves, weekend reduction, 5 anomaly types at 7% base rate — giving statistically realistic data for model development.
 
-**Why stacked architecture?** Stage 1's anomaly probability is fed as an additional feature to Stage 2. This improved regressor R² by 0.001 and RMSE by $0.012/hr over independent models.
+. **Why stacked architecture?** Stage 1's anomaly probability is fed as an additional feature to Stage 2. This improved regressor R² by 0.001 and RMSE by $0.012/hr over independent models.
 
-**Why time-based train/test split?** The data has temporal structure (rolling means, lags). Random splitting would leak future information into training. Time-based splitting ensures the model is evaluated on genuinely unseen future data.
+. **Why time-based train/test split?** The data has temporal structure (rolling means, lags). Random splitting would leak future information into training. Time-based splitting ensures the model is evaluated on genuinely unseen future data.
 
-**Why F1 over accuracy?** Anomalies are 7% of data. A naive "always normal" classifier achieves 93% accuracy but zero utility. F1 balances precision and recall for imbalanced classification.
+. **Why F1 over accuracy?** Anomalies are 7% of data. A naive "always normal" classifier achieves 93% accuracy but zero utility. F1 balances precision and recall for imbalanced classification.
 
-**Why SHAP?** Every alert includes the top 5 features driving the prediction. Engineers can act on specific signals ("cost Z-score spiked 4σ above 24h mean") rather than a binary flag.
+. **Why SHAP?** Every alert includes the top 5 features driving the prediction. Engineers can act on specific signals ("cost Z-score spiked 4σ above 24h mean") rather than a binary flag.
 
 ---
 
