@@ -182,7 +182,7 @@ python -m uvicorn api.main:app --reload --port 8000
 
 ## Live demo
 
-Deployed on Render: 
+Deployed on Render: https://cloudguard-ai-cloud-resource-anomaly.onrender.com
 
 ---
 
