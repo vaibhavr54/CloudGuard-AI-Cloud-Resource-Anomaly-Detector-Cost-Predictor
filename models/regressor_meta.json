@@ -1,0 +1,9 @@
+{
+  "model": "XGBoost",
+  "test_r2": 0.9923,
+  "test_rmse": 0.2383,
+  "test_mae": 0.1137,
+  "test_mape": 6.9798,
+  "stacked": true,
+  "extra_feature": "anomaly_probability"
+}

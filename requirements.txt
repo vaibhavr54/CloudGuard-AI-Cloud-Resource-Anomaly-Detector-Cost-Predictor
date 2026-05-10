@@ -1,0 +1,27 @@
+# Core data
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+xgboost==2.0.3
+imbalanced-learn==0.12.3
+
+# Experiment tracking
+mlflow==2.12.1
+
+# Explainability
+shap==0.45.0
+
+# API
+fastapi==0.111.0
+uvicorn==0.29.0
+python-dotenv==1.0.1
+pydantic==2.7.1
+
+# Notebook
+jupyter==1.0.0
+ipykernel==6.29.4
+
+# Visualisation (notebooks only)
+matplotlib==3.8.4
+seaborn==0.13.2
+plotly==5.22.0

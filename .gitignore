@@ -1,0 +1,40 @@
+# Virtual environment
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Environment variables
+.env
+
+# MLflow runs (too large for GitHub)
+mlruns/
+
+# Model files (too large for GitHub — we'll handle separately)
+models/*.pkl
+models/*.png
+
+# Data files (generated, not needed on GitHub)
+data/raw/
+data/processed/
+data/simulated/
+
+# VS Code
+.vscode/
+.sixth/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

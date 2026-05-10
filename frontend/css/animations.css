@@ -1,0 +1,21 @@
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes flashRed {
+  0%   { background: rgba(248,81,73,0.25); }
+  100% { background: transparent; }
+}
+
+.flash-red { animation: flashRed 1s ease forwards; }

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cloud Anomaly Detector</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+<!-- ── HEADER ───────────────────────────────────────────────── -->
+<header class="header">
+  <div class="header-left">
+    <div class="logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">CloudGuard <span class="logo-sub">AI</span></span>
+    </div>
+    <div class="status-pill" id="statusPill">
+      <span class="pulse-dot"></span> LIVE
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="header-meta" id="lastUpdate">Waiting for data...</span>
+    <button class="btn-pause" id="btnPause" onclick="togglePause()">⏸ Pause</button>
+  </div>
+</header>
+
+<!-- ── SUMMARY CARDS ────────────────────────────────────────── -->
+<section class="cards-row">
+  <div class="card">
+    <div class="card-label">Total Predictions</div>
+    <div class="card-value" id="totalPredictions">0</div>
+    <div class="card-sub">since session start</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Anomalies Detected</div>
+    <div class="card-value red" id="totalAnomalies">0</div>
+    <div class="card-sub" id="anomalyRate">0.00% rate</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Critical Alerts</div>
+    <div class="card-value orange" id="criticalCount">0</div>
+    <div class="card-sub" id="highCount">0 high severity</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Avg Predicted Cost</div>
+    <div class="card-value green" id="avgCost">$0.00</div>
+    <div class="card-sub">per resource / hour</div>
+  </div>
+</section>
+
+<!-- ── MAIN GRID ─────────────────────────────────────────────── -->
+<main class="main-grid">
+
+  <!-- Live CPU + Cost chart -->
+  <section class="panel panel-wide">
+    <div class="panel-header">
+      <span class="panel-title">Live Metrics Stream</span>
+      <select class="selector" id="resourceSelector" onchange="switchResource()">
+        <option value="all">All Resources</option>
+      </select>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="cpuChart"></canvas>
+    </div>
+  </section>
+
+  <!-- Cost forecast chart -->
+  <section class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Cost Forecast ($/hr)</span>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="costChart"></canvas>
+    </div>
+  </section>
+
+  <!-- Anomaly feed -->
+  <section class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Anomaly Feed</span>
+      <span class="badge-count" id="feedCount">0 alerts</span>
+    </div>
+    <div class="feed" id="anomalyFeed">
+      <div class="feed-empty">Monitoring... no anomalies yet</div>
+    </div>
+  </section>
+
+  <!-- Latest prediction detail -->
+  <section class="panel panel-wide">
+    <div class="panel-header">
+      <span class="panel-title">Latest Prediction Detail</span>
+      <span class="panel-sub" id="detailResource">—</span>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-block">
+        <div class="detail-label">Anomaly Probability</div>
+        <div class="prob-bar-wrap">
+          <div class="prob-bar" id="probBar"></div>
+        </div>
+        <div class="detail-value" id="probValue">—</div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Severity</div>
+        <div class="severity-badge" id="severityBadge">—</div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Predicted Cost</div>
+        <div class="detail-value big" id="costValue">—</div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Resource Type</div>
+        <div class="detail-value" id="resourceType">—</div>
+      </div>
+    </div>
+
+    <!-- SHAP reasons -->
+    <div class="shap-grid">
+      <div class="shap-col">
+        <div class="shap-title">Why anomaly? (Top 5 SHAP)</div>
+        <div id="clfShap" class="shap-list"></div>
+      </div>
+      <div class="shap-col">
+        <div class="shap-title">Why this cost? (Top 5 SHAP)</div>
+        <div id="regShap" class="shap-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resource health grid -->
+  <section class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Resource Health</span>
+    </div>
+    <div class="resource-grid" id="resourceGrid"></div>
+  </section>
+
+  <!-- Anomaly type breakdown -->
+  <section class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Severity Distribution</span>
+    </div>
+    <div class="chart-wrap chart-wrap-sm">
+      <canvas id="severityChart"></canvas>
+    </div>
+  </section>
+
+</main>
+
+<link rel="stylesheet" href="/static/css/animations.css"/>
+<script src="/static/js/utils.js"></script>
+<script src="/static/js/charts.js"></script>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/dashboard.js"></script>
+</body>
+</html>
