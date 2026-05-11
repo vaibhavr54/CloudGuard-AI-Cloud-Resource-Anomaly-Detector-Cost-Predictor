@@ -1,5 +1,5 @@
 # CloudGuard AI — Cloud Resource Anomaly Detector & Cost Predictor
-
+![CI](https://github.com/vaibhavr54/CloudGuard-AI-Cloud-Resource-Anomaly-Detector-Cost-Predictor/actions/workflows/ci.yml/badge.svg)
 A real-time ML system that detects cloud infrastructure anomalies and forecasts cost impact — with SHAP explainability on every prediction.
 
 <img width="1870" height="2974" alt="image" src="https://github.com/user-attachments/assets/d9225085-49f7-4647-aa43-1327c3744516" />
