@@ -64,10 +64,28 @@ def client():
 # ── Health check ──────────────────────────────────────────────
 def test_health(client):
     response = client.get("/health")
-    assert response.status_code == 200
     data = response.json()
-    assert data["status"] == "ok"
+    
+    # Health endpoint should always return valid JSON structure
+    assert "status" in data
     assert "version" in data
+    assert "models_loaded" in data
+    assert "classifier" in data
+    assert "regressor" in data
+    
+    # Status should be either "healthy" (models ready) or "loading" (models missing)
+    assert data["status"] in ["healthy", "loading"]
+    
+    # models_loaded should be a boolean
+    assert isinstance(data["models_loaded"], bool)
+    
+    # If models are loaded, status is 200; if not, 503
+    if data["models_loaded"]:
+        assert response.status_code == 200
+        assert data["status"] == "healthy"
+    else:
+        assert response.status_code == 503
+        assert data["status"] == "loading"
 
 
 # ── Stream endpoint ───────────────────────────────────────────

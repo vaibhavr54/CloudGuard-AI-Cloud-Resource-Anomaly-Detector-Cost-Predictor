@@ -12,12 +12,37 @@ from fastapi.responses import FileResponse, JSONResponse
 from api.routes import router
 from config import API_HOST, API_PORT, CLASSIFIER_PATH, REGRESSOR_PATH
 
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Handle startup and shutdown events."""
+    # Startup
+    models = {
+        "classifier": CLASSIFIER_PATH,
+        "regressor": REGRESSOR_PATH,
+    }
+    loaded = {name: path.exists() for name, path in models.items()}
+    status = "ready" if all(loaded.values()) else "training_required"
+    
+    print("=" * 50)
+    print("CloudGuard AI — Startup")
+    print(f"Status: {status}")
+    for name, exists in loaded.items():
+        print(f"  {name}: {'loaded' if exists else 'missing'}")
+    print("=" * 50)
+    
+    yield
+    
+    # Shutdown (if needed)
+    print("CloudGuard AI — Shutting down")
+
 app = FastAPI(
     title="Cloud Anomaly Detector",
     description="Real-time cloud resource anomaly detection & cost prediction",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
