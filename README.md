@@ -170,6 +170,8 @@ python -m uvicorn api.main:app --reload --port 8000
 
 - **Why synthetic data?** Real CloudWatch data is proprietary. The simulation models real AWS metric patterns — business hour load curves, weekend reduction, 5 anomaly types at 7% base rate — giving statistically realistic data for model development.
 
+- **Production hook-in:** In a real AWS deployment, this pipeline would ingest metrics via CloudWatch GetMetricData API (1-minute granularity), compute real-time cost estimates using AWS published pricing rates (no billing API lag), and trigger predictions through a Lambda function or ECS task. The `feature_engineer.py` module is already designed for single-row real-time inference with per-resource rolling history maintained in-memory.
+
 - **Why stacked architecture?** Stage 1's anomaly probability is fed as an additional feature to Stage 2. This improved regressor R² by 0.001 and RMSE by $0.012/hr over independent models.
 
 - **Why time-based train/test split?** The data has temporal structure (rolling means, lags). Random splitting would leak future information into training. Time-based splitting ensures the model is evaluated on genuinely unseen future data.
