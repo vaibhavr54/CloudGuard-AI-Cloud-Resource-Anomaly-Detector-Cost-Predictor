@@ -1,0 +1,12 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.git/
+.gitignore
+.env
+*.ipynb_checkpoints/
+.vscode/
+.sixth/
+*.log
