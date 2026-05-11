@@ -27,5 +27,5 @@ echo "=========================================="
 # Start FastAPI
 exec python -m uvicorn api.main:app \
     --host 0.0.0.0 \
-    --port ${PORT:-8000} \
+    --port ${PORT:-7860} \
     --workers 1

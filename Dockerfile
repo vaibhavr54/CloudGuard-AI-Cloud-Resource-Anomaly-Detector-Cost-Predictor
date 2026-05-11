@@ -23,8 +23,8 @@ RUN mkdir -p data/raw data/processed data/simulated models mlruns
 # ── Make entrypoint executable ─────────────────────────────────
 RUN chmod +x docker-entrypoint.sh
 
-# ── Expose port ────────────────────────────────────────────────
-EXPOSE 8000
+ENV PORT=7860
+EXPOSE 7860
 
 # ── Entrypoint ─────────────────────────────────────────────────
 ENTRYPOINT ["./docker-entrypoint.sh"]
