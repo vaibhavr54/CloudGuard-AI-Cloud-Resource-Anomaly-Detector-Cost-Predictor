@@ -27,8 +27,6 @@ Every 5 seconds, the system:
 
 
 
-**Key Design:** Stacked two-stage pipeline where Stage 1's anomaly probability is fed as a feature to Stage 2, improving cost prediction accuracy.
-
 ---
 
 ## Results
